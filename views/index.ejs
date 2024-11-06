@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>What's anime to watch today?</h1>
+    <div class="card">
+      <h3>Search your anime</h3>
+    <form action="/search" method="POST">
+        <input type="text" name="query" placeholder="Enter anime title" id="query" value=" <%= locals.query %>" required>
+        <button class="button-24" type="submit">Search</button>
+      </form>
+    </div>
+    
+    <div class="card">
+        <% if (locals.results && locals.results.length > 0) { %>
+            <h2>Search Results:</h2>
+            <ul>
+              <% locals.results.forEach(anime => { %>
+                <li><strong><%= anime.title %></strong></li>
+                <img src="
+                    <%= anime.images.jpg.image_url %>
+                    ">
+                <p><%= anime.synopsis %></p>
+              <% }) %>
+            </ul>
+          <% } else if (locals.query) { %>
+            <p>No results found for "<%= query %>".</p>
+          <% } %>
+    </div>
+     
+  
+    <% if (locals.title ){ %>
+        <div class="card">
+            <p>
+              <%= title %>
+            </p>
+            <img src="
+            <%= imgUrl %>
+            ">
+          
+    <%}else{ %>
+        <p> Confused? Bored? Stress?  Just Click it!</p>
+    <%} %>
+    <form>
+        <input id="get" type="submit" value="Random Anime" class="button-24" formaction="/random">
+        
+    </form>
+       </div>
+</body>
+</html>
